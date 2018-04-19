@@ -15,3 +15,12 @@ model_select = function(covariates, responses, cutoff) {
   return(regression2$p.value)
   
 }
+
+run_simulation(n_trials, n, p, cutoff){
+  p_values = vector(length = n_trials)
+  for (i in 1:n_trials) {
+    data = generate_data(n,p)
+    p_values[i] = model_select(data$covariates, data$responses, cutoff)
+  } 
+  hist(p_values)
+}
