@@ -16,11 +16,16 @@ model_select = function(covariates, responses, cutoff) {
   
 }
 
-run_simulation(n_trials, n, p, cutoff){
+run_simulation = function(n_trials, n, p, cutoff){
   p_values = vector(length = n_trials)
   for (i in 1:n_trials) {
     data = generate_data(n,p)
     p_values[i] = model_select(data$covariates, data$responses, cutoff)
   } 
-  hist(p_values)
+  save(p_values)
+}
+
+make_plot = function(data_path) {
+   p_values =load(data_path)
+   hist(p_values)
 }
